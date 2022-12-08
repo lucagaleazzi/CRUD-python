@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            A simple danger alert—check it out!
+        </div>
+    {% endif %}
+
+    <h1>Registro de familiar</h1>
+    <form action="{% url 'guardarFamiliar' %}" method="POST">
+        {% csrf_token %}
+        {% if mensaje %}
+            <div class="alert alert-info" role="alert">
+                Familiar registrado exitosamente!
+            </div>
+        {% endif %}
+
+        {{ form|crispy }}
+        <br>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-warning" href="{% url 'ListaFamiliares' %}">Cancelar</a>
+    </form>
+
+{% endblock %}
